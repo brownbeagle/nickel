@@ -44,14 +44,14 @@ class TestDates < Test::Unit::TestCase
                     ]
   end
 
-  def test__october_5_2012_and_october_23_2012
+  
+  def test__01_January_2010_from_10_colon_00_to_22_colon_00
     today = Time.local(2008, 8, 25)
-    str = 'Appointments with dentist are on october 5, 2012 and october 23rd 2012'
-    assert_message  NLP.new(str, today), "Appointments with dentist"
+    str = '01 January 2010 from 10:00 to 22:00'
+    assert_message  NLP.new(str, today), ''
     assert_nlp      NLP.new(str, today), 
                     [
-                      Occurrence.new(:type => :single, :start_date => ZDate.new("20111005")), 
-                      Occurrence.new(:type => :single, :start_date => ZDate.new("20121023"))
+                      Occurrence.new(:type => :single, :start_date => ZDate.new("20100101"), :start_time => ZTime.new("100000"), :end_time => ZTime.new("220000"))
                     ]
   end
 
