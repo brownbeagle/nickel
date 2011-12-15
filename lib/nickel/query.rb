@@ -464,13 +464,13 @@ module Nickel
     #     match all of the following
     #     a.) 5,   12,   530,    1230,     2000
     #     b.) 5pm, 12pm, 530am,  1230am,
-    #     c.)            5:30,   12:30,    20:00
+    #     c.)            5:30,   12:30,    20:00,   3:00:00, 20:00:00
     #     d.)            5:3,    12:3,     20:3    ...  that's not needed but we supported it in version 1, this would be 5:30 and 12:30
     #     e.)            5:30am, 12:30am
     #     20:00am, 20:00pm ... ZTime will flag these as invalid, so it is ok if we match them here
     def interpret_time
       a_b   = /^(\d{1,4})(am|pm)?$/                     # handles cases (a) and (b)
-      c_d_e = /^(\d{1,2}):(\d{1,2})(am|pm)?$/           # handles cases (c), (d), and (e)
+      c_d_e = /^(\d{1,2}):(\d{1,2})(?::\d{1,2})?(am|pm)?$/           # handles cases (c), (d), and (e)
       if mdata = match(a_b)
         am_pm = mdata[2]
         case mdata[1].length                            # this may look a bit confusing, but all we are doing is interpreting    

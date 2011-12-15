@@ -157,6 +157,17 @@ class TestDates < Test::Unit::TestCase
                      ]
   end
 
+  def test__this_sunday_from_90000_to_110000
+    now = Time.local(2007, 11, 25)
+    assert_nlp       NLP.new("Go to the park this sunday from 9:00:00 to 11:00:00", now),
+                     [
+                       Occurrence.new(:type => :single, 
+                                      :start_date => ZDate.new("20071125"),
+                                      :start_time => ZTime.new("090000"),
+                                      :end_time => ZTime.new("110000"))
+                     ]
+  end
+
   def test__today_at_10_11_12_and_1_to_5
     now = Time.local(2008, 9, 10)
     assert_message  NLP.new("movie showings are today at 10, 11, 12, and 1 to 5", now),  "movie showings"
